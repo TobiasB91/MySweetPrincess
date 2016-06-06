@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: a065958a0a24905469b3d0737a78f4a1
+timeCreated: 1465234774
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - floorTexture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
