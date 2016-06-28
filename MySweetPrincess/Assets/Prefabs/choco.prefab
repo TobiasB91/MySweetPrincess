@@ -76,6 +76,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   calories: 25
+  rotSpeed: 1
 --- !u!135 &13574386
 SphereCollider:
   m_ObjectHideFlags: 1
