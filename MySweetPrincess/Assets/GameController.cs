@@ -6,9 +6,14 @@ public class GameController : MonoBehaviour {
 
     List<GameObject> sweets = new List<GameObject>();
     public GameObject player;
+
     Vector3 playerStartPos;
     Quaternion playerStartRot;
     int startWeight;
+
+    public Camera camera;
+    Vector3 cameraStartPos;
+    Quaternion cameraStartRot;
 
 	// Use this for initialization
 	void Start () {
@@ -18,6 +23,9 @@ public class GameController : MonoBehaviour {
         playerStartPos = player.transform.position;
         playerStartRot = player.transform.rotation;
         startWeight = player.GetComponent<CharacterController>().weight;
+        cameraStartPos = camera.transform.position;
+        cameraStartRot = camera.transform.rotation;
+        Reset();
 	}
 	
 	// Update is called once per frame
@@ -29,10 +37,11 @@ public class GameController : MonoBehaviour {
         foreach (GameObject candy in sweets) {
             candy.SetActive(true);
         }
-        // Camera Reset doesn't work
         player.GetComponent<CharacterController>().weight = startWeight;
         player.GetComponent<CharacterController>().isDead = false;
         player.transform.position = playerStartPos;
         player.transform.rotation = playerStartRot;
+        camera.transform.position = cameraStartPos;
+        camera.transform.rotation = cameraStartRot;
     }
 }

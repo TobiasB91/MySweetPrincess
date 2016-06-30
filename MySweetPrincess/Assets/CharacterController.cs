@@ -6,6 +6,7 @@ public class CharacterController : MonoBehaviour {
 
     public int weight = 0;
     public int calorieLoss = 5;
+    public int adiposeWeight = 120;
     public Text weightText;
     public Camera camera;
     Vector3 offSet;
@@ -21,43 +22,38 @@ public class CharacterController : MonoBehaviour {
         pNormal = transform.FindChild("Princess normal").gameObject;
         pThin = transform.FindChild("Princess thin").gameObject;
         startPos = transform.position;
-        offSet = camera.transform.position; // Tiny Bug
-	}
+        offSet = camera.transform.position - transform.position;
+    }
 
     // Update is called once per frame
     void Update() {
         if (!isDead) {
-            if (Input.GetKeyDown(KeyCode.UpArrow))
-            {
+            if (Input.GetKeyDown(KeyCode.UpArrow)) {
                 transform.position += new Vector3(1, 0, 0);
                 transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
                 weight -= calorieLoss;
                 camera.transform.position = transform.position + offSet;
             }
-            if (Input.GetKeyDown(KeyCode.DownArrow))
-            {
+            if (Input.GetKeyDown(KeyCode.DownArrow)) {
                 transform.position += new Vector3(-1, 0, 0);
                 transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
                 weight -= calorieLoss;
                 camera.transform.position = transform.position + offSet;
             }
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
-            {
+            if (Input.GetKeyDown(KeyCode.LeftArrow)) {
                 transform.position += new Vector3(0, 0, 1);
                 transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
                 weight -= calorieLoss;
                 camera.transform.position = transform.position + offSet;
             }
-            if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
+            if (Input.GetKeyDown(KeyCode.RightArrow)) {
                 transform.position += new Vector3(0, 0, -1);
                 transform.rotation = Quaternion.Euler(new Vector3(0, 270, 0));
                 weight -= calorieLoss;
                 camera.transform.position = transform.position + offSet;
             }
 
-            if (weight <= 0)
-            {
+            if (weight <= 0 || weight >= adiposeWeight) {
                 Die();
             }
         }
@@ -86,8 +82,15 @@ public class CharacterController : MonoBehaviour {
 
     void Die() {
         isDead = true;
-        transform.rotation = Quaternion.Euler(new Vector3(0, transform.rotation.eulerAngles.y, 90));
-        transform.position -= new Vector3(0, +0.25f, 0);
+
+        // Starved or too thick?
+        if (weight <= 0) { 
+            transform.rotation = Quaternion.Euler(new Vector3(0, transform.rotation.eulerAngles.y, 90));
+        } else {
+            transform.rotation = Quaternion.Euler(new Vector3(0, transform.rotation.eulerAngles.y, -90));
+        }
+        // Move to ground
+        transform.position -= new Vector3(0, 0.3f, 0);
     }
 
     void UpdateText() {
