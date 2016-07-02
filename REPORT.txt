@@ -1,0 +1,25 @@
+Waldemar:
+- Princess Models made in Blender
+- Basic Movement in CharController
+- Wrote CameraController.cs
+- Wrote GameController.cs
+
+Sylvia:
+- Chocolate and Bonbons and Stones made in Blender.
+- Wrote Sweets.cs
+- Initial concept for the level
+
+Tobias:
+- Fan made in Blender
+- Wrote FanController.cs
+- Wrote RayCastController.cs
+- Created Level Cube + searched the Texture
+
+Created together using Pair programming:
+- Wrote advanced movement in CharController.cs
+  - Including Raycasting to detect up and down movements and general collision detection
+- Built and extended the Level
+- Made the Water Cube and Deep Water
+- Researched Sounds for further use
+- Added Sounds to game objects
+- Created Canvas elements to display text

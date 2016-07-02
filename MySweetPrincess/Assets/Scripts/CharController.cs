@@ -26,6 +26,7 @@ public class CharController : MonoBehaviour {
     public GameObject raycast;
     bool moveForward = false;
     public bool enteredDeepWater;
+    AudioSource audio;
 
 	// Use this for initialization
 	void Start () {
@@ -34,6 +35,7 @@ public class CharController : MonoBehaviour {
         pThin = transform.FindChild("Princess thin").gameObject;
         startPos = transform.position;
         offSet = camera.transform.position - transform.position;
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -177,7 +179,8 @@ public class CharController : MonoBehaviour {
     void OnTriggerEnter(Collider hit) {
         if (hit.gameObject.tag == "Candy") {
             weight += hit.gameObject.GetComponent<Sweets>().calories;
-            hit.gameObject.SetActive(false); 
+            hit.gameObject.SetActive(false);
+            audio.Play();
         }
     }
 }
