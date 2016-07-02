@@ -13,12 +13,15 @@ public class CharController : MonoBehaviour {
     public int floatWeight = 50;
     public int starvationWeight = 30;
     public Text weightText;
+    public Text stepsText;
+    public Text gameOver;
     public Camera camera;
     Vector3 offSet;
     Vector3 startPos;
     GameObject pFat;
     GameObject pNormal;
     GameObject pThin;
+    public int steps = 0;
     public bool isDead;
     public GameObject raycast;
     bool moveForward = false;
@@ -68,11 +71,13 @@ public class CharController : MonoBehaviour {
                     // Hit candy
                     if (hit.collider.gameObject.tag == "Candy") {
                         transform.Translate(Vector3.left);
+                        steps++;
                     }
                     if (raycast.GetComponent<RaycastController>().ColliderInfrontAbove(out hitAbove)) {
                         // Hit but candy above
                         if (hitAbove.collider.gameObject.tag == "Candy") {
                             transform.Translate(Vector3.left + Vector3.up);
+                            steps++;
                         }
                     // No hit above
                     } else { 
@@ -80,6 +85,7 @@ public class CharController : MonoBehaviour {
                             transform.Translate(Vector3.left + Vector3.up);
                             enteredDeepWater = false;
                             weight -= calorieLossUp;
+                            steps++;
                         }
                     }
                 // No hit in front
@@ -102,6 +108,7 @@ public class CharController : MonoBehaviour {
                         }
                     }
                     transform.Translate(Vector3.left);
+                    steps++;
 
                     if (enteredDeepWater == true) {
                         weight -= calorieLossDeepWater;
@@ -155,6 +162,16 @@ public class CharController : MonoBehaviour {
 
     void UpdateText() {
         weightText.text = "Weight: " + weight;
+        stepsText.text = "Steps: " + steps;
+
+        if (weight >= adiposeWeight) gameOver.text = "You're too fat to walk!";
+        if (weight <= starvationWeight) gameOver.text = "You starved!";
+
+        if (pThin.activeSelf || pFat.activeSelf) {
+            weightText.color = Color.red;
+        } else {
+            weightText.color = Color.white;
+        }
     }
 
     void OnTriggerEnter(Collider hit) {

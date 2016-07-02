@@ -14,9 +14,10 @@ public class GameController : MonoBehaviour {
     public Camera camera;
     Vector3 cameraStartPos;
     Quaternion cameraStartRot;
+    CharController CharController;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         foreach (Transform child in transform) {
             sweets.Add(child.gameObject);
         }
@@ -25,24 +26,37 @@ public class GameController : MonoBehaviour {
         startWeight = player.GetComponent<CharController>().weight;
         cameraStartPos = camera.transform.position;
         cameraStartRot = camera.transform.rotation;
+        CharController = player.GetComponent<CharController>();
         Reset();
 	}
 	
 	// Update is called once per frame
 	void Update () {
         if (Input.GetKeyDown(KeyCode.R)) Reset();
+        LevelComplete();
 	}
 
     void Reset() {
         foreach (GameObject candy in sweets) {
             candy.SetActive(true);
         }
-        player.GetComponent<CharController>().weight = startWeight;
-        player.GetComponent<CharController>().isDead = false;
-        player.GetComponent<CharController>().enteredDeepWater = false;
+
+        CharController.weight = startWeight;
+        CharController.isDead = false;
+        CharController.enteredDeepWater = false;
+        CharController.steps = 0;
+        CharController.gameOver.text = "";
         player.transform.position = playerStartPos;
         player.transform.rotation = playerStartRot;
         camera.transform.position = cameraStartPos;
         camera.transform.rotation = cameraStartRot;
+    }
+
+    void LevelComplete() {
+        foreach (GameObject candy in sweets) {
+            if (candy.activeSelf) return;
+        }
+        CharController.isDead = true;
+        CharController.gameOver.text = "Level Complete!";
     }
 }
