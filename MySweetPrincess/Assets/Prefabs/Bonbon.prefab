@@ -75,7 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f498090fcdb9a54ea61ce6518deb71d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  calories: 25
+  calories: 5
   rotSpeed: 1
 --- !u!135 &13517648
 SphereCollider:

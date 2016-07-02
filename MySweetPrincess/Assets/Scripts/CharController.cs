@@ -6,7 +6,12 @@ public class CharController : MonoBehaviour {
 
     public int weight = 0;
     public int calorieLoss = 5;
+    public int calorieLossUp = 2;
+    public int calorieLossDeepWater = 2;
     public int adiposeWeight = 120;
+    public int sinkInWater = 80;
+    public int floatWeight = 50;
+    public int starvationWeight = 30;
     public Text weightText;
     public Camera camera;
     Vector3 offSet;
@@ -17,6 +22,7 @@ public class CharController : MonoBehaviour {
     public bool isDead;
     public GameObject raycast;
     bool moveForward = false;
+    public bool enteredDeepWater;
 
 	// Use this for initialization
 	void Start () {
@@ -66,24 +72,29 @@ public class CharController : MonoBehaviour {
                     if (raycast.GetComponent<RaycastController>().ColliderInfrontAbove(out hitAbove)) {
                         // Hit but candy above
                         if (hitAbove.collider.gameObject.tag == "Candy") {
-                            transform.Translate(Vector3.left);
+                            transform.Translate(Vector3.left + Vector3.up);
                         }
                     // No hit above
                     } else { 
-                            if (hit.collider.gameObject.name == "Level Cube") {
-                                transform.Translate(Vector3.left + Vector3.up);
-                            }
+                        if (hit.collider.gameObject.name == "Level Cube") {
+                            transform.Translate(Vector3.left + Vector3.up);
+                            enteredDeepWater = false;
+                            weight -= calorieLossUp;
+                        }
                     }
                 // No hit in front
                 } else {
                     // Hit beneath
                     if (raycast.GetComponent<RaycastController>().ColliderInfrontBeneath(out hitBeneath)) {
-                        if (hitBeneath.collider.gameObject.tag == "Candy" || hitBeneath.collider.gameObject.tag == "Water") { 
+                        if (hitBeneath.collider.gameObject.tag == "Candy" || (hitBeneath.collider.gameObject.name == "Deep Water" &&
+                                !enteredDeepWater && weight >= sinkInWater)) { 
                             transform.Translate(Vector3.down);
+                            enteredDeepWater = true;
                         }
                     } else {
                         // Hit beneath beneath
-                        if (raycast.GetComponent<RaycastController>().ColliderInfrontBeneathBeneath(out hitBeneathBeneath) && hitBeneathBeneath.collider.gameObject.name == "Level Cube") {
+                        if (raycast.GetComponent<RaycastController>().ColliderInfrontBeneathBeneath(out hitBeneathBeneath) && 
+                                hitBeneathBeneath.collider.gameObject.name == "Level Cube") {
                             transform.Translate(Vector3.down);
                         }
                         else {
@@ -91,12 +102,17 @@ public class CharController : MonoBehaviour {
                         }
                     }
                     transform.Translate(Vector3.left);
-                    weight -= calorieLoss;
+
+                    if (enteredDeepWater == true) {
+                        weight -= calorieLossDeepWater;
+                    } else {
+                        weight -= calorieLoss;
+                    }
                 }
                 moveForward = false;
             }
 
-            if (weight <= 0 || weight >= adiposeWeight)
+            if (weight <= starvationWeight || weight >= adiposeWeight)
             {
                 Die();
             }
@@ -107,17 +123,17 @@ public class CharController : MonoBehaviour {
     }
 
     void ChangeWeight() {
-        if (weight < 40) {
+        if (weight <= floatWeight) {
             pThin.SetActive(true);
             pFat.SetActive(false);
             pNormal.SetActive(false);
         }
-        if (weight > 40 && weight < 100) {
+        if (weight > floatWeight && weight < sinkInWater) {
             pNormal.SetActive(true);
             pThin.SetActive(false);
             pFat.SetActive(false);
         }
-        if (weight > 100) {
+        if (weight >= sinkInWater) {
             pFat.SetActive(true);
             pNormal.SetActive(false);
             pThin.SetActive(false);

@@ -10,8 +10,8 @@ public class RaycastController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Vector3 forward = transform.TransformDirection(Vector3.forward) * 0.6f;
-        Debug.DrawRay(transform.position, forward, Color.green);
+        Vector3 forward = transform.TransformDirection(Vector3.forward) * 0.8f;
+        Debug.DrawRay(transform.position + Vector3.up, forward, Color.red);
     }
 
 	public bool ColliderInfront(out RaycastHit hit) {
@@ -22,10 +22,10 @@ public class RaycastController : MonoBehaviour {
 	}
 
     public bool ColliderInfrontAbove(out RaycastHit hit) {
-        Vector3 forward = transform.TransformDirection(Vector3.forward) * 0.6f;
+        Vector3 forward = transform.TransformDirection(Vector3.forward) * 0.8f;
         Debug.DrawRay(transform.position + Vector3.up, forward, Color.red);
 
-        return Physics.Raycast(transform.position + Vector3.up, forward, out hit, 0.6f);
+        return Physics.Raycast(transform.position + Vector3.up, forward, out hit, 0.8f);
     }
 
     public bool ColliderInfrontBeneath(out RaycastHit hit) {

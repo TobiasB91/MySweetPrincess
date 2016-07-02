@@ -39,6 +39,7 @@ public class GameController : MonoBehaviour {
         }
         player.GetComponent<CharController>().weight = startWeight;
         player.GetComponent<CharController>().isDead = false;
+        player.GetComponent<CharController>().enteredDeepWater = false;
         player.transform.position = playerStartPos;
         player.transform.rotation = playerStartRot;
         camera.transform.position = cameraStartPos;
