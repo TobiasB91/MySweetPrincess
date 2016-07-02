@@ -1155,7 +1155,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 194010, guid: 5b1689adba257c24aaff2ea5a38784c5, type: 2}
       propertyPath: m_Name
-      value: Conifer_Desktop (1)
+      value: Conifer_Desktop
       objectReference: {fileID: 0}
     - target: {fileID: 178778, guid: 5b1689adba257c24aaff2ea5a38784c5, type: 2}
       propertyPath: m_IsActive
@@ -2385,6 +2385,76 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5b1689adba257c24aaff2ea5a38784c5, type: 2}
   m_IsPrefabParent: 0
+--- !u!1001 &687264666
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1204463478}
+    m_Modifications:
+    - target: {fileID: 450820, guid: 5b1689adba257c24aaff2ea5a38784c5, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 450820, guid: 5b1689adba257c24aaff2ea5a38784c5, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 450820, guid: 5b1689adba257c24aaff2ea5a38784c5, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 450820, guid: 5b1689adba257c24aaff2ea5a38784c5, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 450820, guid: 5b1689adba257c24aaff2ea5a38784c5, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 450820, guid: 5b1689adba257c24aaff2ea5a38784c5, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 450820, guid: 5b1689adba257c24aaff2ea5a38784c5, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 450820, guid: 5b1689adba257c24aaff2ea5a38784c5, type: 2}
+      propertyPath: m_RootOrder
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 194010, guid: 5b1689adba257c24aaff2ea5a38784c5, type: 2}
+      propertyPath: m_Name
+      value: Conifer_Desktop
+      objectReference: {fileID: 0}
+    - target: {fileID: 178778, guid: 5b1689adba257c24aaff2ea5a38784c5, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 146410, guid: 5b1689adba257c24aaff2ea5a38784c5, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 20557258, guid: 5b1689adba257c24aaff2ea5a38784c5, type: 2}
+      propertyPath: m_LODs.Array.data[2].screenRelativeHeight
+      value: 0.010248812
+      objectReference: {fileID: 0}
+    - target: {fileID: 20557258, guid: 5b1689adba257c24aaff2ea5a38784c5, type: 2}
+      propertyPath: m_LODs.Array.data[1].screenRelativeHeight
+      value: 0.011583399
+      objectReference: {fileID: 0}
+    - target: {fileID: 20557258, guid: 5b1689adba257c24aaff2ea5a38784c5, type: 2}
+      propertyPath: m_LODs.Array.data[0].screenRelativeHeight
+      value: 0.012281313
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 5b1689adba257c24aaff2ea5a38784c5, type: 2}
+  m_IsPrefabParent: 0
+--- !u!4 &687264667 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 450820, guid: 5b1689adba257c24aaff2ea5a38784c5, type: 2}
+  m_PrefabInternal: {fileID: 687264666}
 --- !u!4 &694365465 stripped
 Transform:
   m_PrefabParentObject: {fileID: 467206, guid: 41e8d58b304e6411ea54f00955e8ddab, type: 2}
@@ -2725,84 +2795,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 41e8d58b304e6411ea54f00955e8ddab, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &821171040
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 146410, guid: 5b1689adba257c24aaff2ea5a38784c5, type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 821171041}
-  - 33: {fileID: 821171044}
-  - 23: {fileID: 821171043}
-  - 193: {fileID: 821171042}
-  m_Layer: 0
-  m_Name: Conifer_Desktop_LOD0 (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &821171041
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 416070, guid: 5b1689adba257c24aaff2ea5a38784c5, type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 821171040}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -4.4999995, z: 60}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2059306939}
-  m_RootOrder: 4
---- !u!193 &821171042
-Tree:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 19393222, guid: 5b1689adba257c24aaff2ea5a38784c5,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 821171040}
-  m_SpeedTreeWindAsset: {fileID: 22800000, guid: 469edab27ab6d004d84af2c4a851bd7f,
-    type: 3}
-  m_TreeData: {fileID: 0}
---- !u!23 &821171043
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 2383664, guid: 5b1689adba257c24aaff2ea5a38784c5,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 821171040}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_Materials:
-  - {fileID: 2100000, guid: 0aa00c0212e047047aa5a1ce93b07f49, type: 2}
-  - {fileID: 2100000, guid: fdb77c3917027234db7a7792019eda2e, type: 2}
-  - {fileID: 2100000, guid: d4880c932a8e12b48a3039233e9634a0, type: 2}
-  - {fileID: 2100000, guid: 2bcb00d145ec17e4cad096cedfd84138, type: 2}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 1
-  m_ReflectionProbeUsage: 1
-  m_ProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
---- !u!33 &821171044
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 3396514, guid: 5b1689adba257c24aaff2ea5a38784c5,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 821171040}
-  m_Mesh: {fileID: 4300000, guid: 469edab27ab6d004d84af2c4a851bd7f, type: 3}
 --- !u!1 &874223045
 GameObject:
   m_ObjectHideFlags: 0
@@ -3411,6 +3403,7 @@ Transform:
   - {fileID: 604566818}
   - {fileID: 310875547}
   - {fileID: 1965543354}
+  - {fileID: 687264667}
   m_Father: {fileID: 253330361}
   m_RootOrder: 1
 --- !u!4 &1205607102 stripped

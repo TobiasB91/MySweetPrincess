@@ -21,6 +21,10 @@ public class CameraController : MonoBehaviour {
         if (Input.GetKey(KeyCode.D)) transform.Translate(Vector3.right * speed * Time.deltaTime);
         // Change to topview and revert
         if (Input.GetKey(KeyCode.Q)) transform.rotation = Quaternion.Euler(new Vector3(90, 90, 0));
-        if (Input.GetKey(KeyCode.E)) transform.rotation = startRot;
+        if (Input.GetKey(KeyCode.E)) ResetCamera();
+    }
+
+    public void ResetCamera() {
+        transform.rotation = startRot;
     }
 }

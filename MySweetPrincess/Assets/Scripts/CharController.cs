@@ -69,6 +69,9 @@ public class CharController : MonoBehaviour {
             }
 
             if (moveForward) {
+                // Reset Camera
+                camera.GetComponent<CameraController>().ResetCamera();
+
                 if (raycast.GetComponent<RaycastController>().ColliderInfront(out hit)) {
                     // Hit candy
                     if (hit.collider.gameObject.tag == "Candy") {
@@ -104,8 +107,7 @@ public class CharController : MonoBehaviour {
                         if (raycast.GetComponent<RaycastController>().ColliderInfrontBeneathBeneath(out hitBeneathBeneath) && 
                                 hitBeneathBeneath.collider.gameObject.name == "Level Cube") {
                             transform.Translate(Vector3.down);
-                        }
-                        else {
+                        } else {
                             return;
                         }
                     }
