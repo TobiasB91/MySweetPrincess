@@ -16,7 +16,7 @@ public class GameController : MonoBehaviour {
     Quaternion cameraStartRot;
     CharController CharController;
 
-    // Use this for initialization
+    // Initialization 
     void Start () {
         foreach (Transform child in transform) {
             sweets.Add(child.gameObject);
@@ -32,10 +32,12 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		// continuously check if "R" for reset is pressed and if the level is completed
         if (Input.GetKeyDown(KeyCode.R)) Reset();
         LevelComplete();
 	}
 
+	//Reset everything to starting values.
     void Reset() {
         foreach (GameObject candy in sweets) {
             candy.SetActive(true);
@@ -51,7 +53,10 @@ public class GameController : MonoBehaviour {
         camera.transform.position = cameraStartPos;
         camera.transform.rotation = cameraStartRot;
     }
-
+	/*
+	 * Check if any candy is still active. 
+	 * If not, set character to dead so it cannot be moved anymore and change the gameover text.
+	 */
     void LevelComplete() {
         foreach (GameObject candy in sweets) {
             if (candy.activeSelf) return;

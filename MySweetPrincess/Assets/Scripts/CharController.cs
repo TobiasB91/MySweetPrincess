@@ -17,7 +17,6 @@ public class CharController : MonoBehaviour {
     public Text gameOver;
     public Camera camera;
     Vector3 offSet;
-    Vector3 startPos;
     GameObject pFat;
     GameObject pNormal;
     GameObject pThin;
@@ -28,12 +27,11 @@ public class CharController : MonoBehaviour {
     public bool enteredDeepWater;
     AudioSource audio;
 
-	// Use this for initialization
+	// Initialization 
 	void Start () {
 	    pFat = transform.FindChild("Princess fat").gameObject;
         pNormal = transform.FindChild("Princess normal").gameObject;
         pThin = transform.FindChild("Princess thin").gameObject;
-        startPos = transform.position;
         offSet = camera.transform.position - transform.position;
         audio = GetComponent<AudioSource>();
     }
@@ -46,6 +44,13 @@ public class CharController : MonoBehaviour {
             RaycastHit hitAbove;
             RaycastHit hitBeneath;
             RaycastHit hitBeneathBeneath;
+
+			/*
+			 * Check if one of the arrow keys were pressed. 
+			 * If so the character has to rotate into that derection,
+			 * the camera has to be set to the position of the character
+			 * and the character is supposed to move forward.
+			 */
 
             if (Input.GetKeyDown(KeyCode.UpArrow)) {
                 transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
@@ -69,7 +74,7 @@ public class CharController : MonoBehaviour {
             }
 
             if (moveForward) {
-                // Reset Camera
+                // Reset camera to play rotation
                 camera.GetComponent<CameraController>().ResetCamera();
 
                 if (raycast.GetComponent<RaycastController>().ColliderInfront(out hit)) {
@@ -79,7 +84,7 @@ public class CharController : MonoBehaviour {
                         steps++;
                     }
                     if (raycast.GetComponent<RaycastController>().ColliderInfrontAbove(out hitAbove)) {
-                        // Hit but candy above
+                        // Hit candy above
                         if (hitAbove.collider.gameObject.tag == "Candy") {
                             transform.Translate(Vector3.left + Vector3.up);
                             steps++;
@@ -95,7 +100,8 @@ public class CharController : MonoBehaviour {
                     }
                 // No hit in front
                 } else {
-                    // Hit beneath
+//hier ist was falsch!
+                    // Hit beneath 
                     if (raycast.GetComponent<RaycastController>().ColliderInfrontBeneath(out hitBeneath)) {
                         if (hitBeneath.collider.gameObject.tag == "Candy" || (hitBeneath.collider.gameObject.name == "Deep Water" &&
                                 !enteredDeepWater && weight >= sinkInWater)) { 
@@ -110,6 +116,7 @@ public class CharController : MonoBehaviour {
                         } else {
                             return;
                         }
+//bis hier ueberarbeiten!
                     }
                     transform.Translate(Vector3.left);
                     steps++;

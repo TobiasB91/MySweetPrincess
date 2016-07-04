@@ -7,6 +7,7 @@ public class Sweets : MonoBehaviour {
     public float rotSpeed;
 
     void Update() {
+		//rotate candy
         transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x,
                                                           transform.rotation.eulerAngles.y + rotSpeed,
                                                           transform.rotation.eulerAngles.z));
