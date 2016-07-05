@@ -38,4 +38,11 @@ public class RaycastController : MonoBehaviour {
 
         return Physics.Raycast(transform.position + Vector3.up * 2f, forward, out hit, 4f);
     }
+
+	public RaycastHit[] ColliderInfrontBeneathAll() {
+		Vector3 forward = transform.TransformDirection(Vector3.forward + Vector3.down * 3.5f);
+		//Debug.DrawRay(transform.position + Vector3.up * 2f, forward, Color.yellow);
+
+		return Physics.RaycastAll(transform.position + Vector3.up * 2f, forward, 4f);
+	}
 }

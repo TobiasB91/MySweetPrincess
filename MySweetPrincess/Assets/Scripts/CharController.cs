@@ -44,6 +44,7 @@ public class CharController : MonoBehaviour {
             RaycastHit hitAbove;
             RaycastHit hitBeneath;
             RaycastHit hitBeneathBeneath;
+			RaycastHit[] allBeneath;
 
 			/*
 			 * Check if one of the arrow keys were pressed. 
@@ -76,21 +77,23 @@ public class CharController : MonoBehaviour {
             if (moveForward) {
                 // Reset camera to play rotation
                 camera.GetComponent<CameraController>().ResetCamera();
-
+				// hit in front
                 if (raycast.GetComponent<RaycastController>().ColliderInfront(out hit)) {
-                    // Hit candy
+                    // Hit candy in front, move normal, no weightloss
                     if (hit.collider.gameObject.tag == "Candy") {
                         transform.Translate(Vector3.left);
                         steps++;
                     }
+					// hit in front above
                     if (raycast.GetComponent<RaycastController>().ColliderInfrontAbove(out hitAbove)) {
-                        // Hit candy above
+                        // Hit candy above, move forward and up, no weightloss
                         if (hitAbove.collider.gameObject.tag == "Candy") {
                             transform.Translate(Vector3.left + Vector3.up);
                             steps++;
                         }
                     // No hit above
                     } else { 
+						// if nothing is above and a "Level Cube" in front move forward and up
                         if (hit.collider.gameObject.name == "Level Cube") {
                             transform.Translate(Vector3.left + Vector3.up);
                             enteredDeepWater = false;
@@ -98,38 +101,54 @@ public class CharController : MonoBehaviour {
                             steps++;
                         }
                     }
-                // No hit in front
+                // No hit in front, but still we cannot just move forward
                 } else {
-//hier ist was falsch!
-                    // Hit beneath 
+                    // Hit in front beneath 
                     if (raycast.GetComponent<RaycastController>().ColliderInfrontBeneath(out hitBeneath)) {
-                        if (hitBeneath.collider.gameObject.tag == "Candy" || (hitBeneath.collider.gameObject.name == "Deep Water" &&
-                                !enteredDeepWater && weight >= sinkInWater)) { 
+						// hit candy beneath, move down, no weightloss
+						if (hitBeneath.collider.gameObject.tag == "Candy") {
+							transform.Translate(Vector3.down);
+							weight += calorieLoss; // we substract the weight after the forward movement so we add the same amount here.
+						}
+						// hit "Deep Water" beneath while being heavy enough, move down
+						if (hitBeneath.collider.gameObject.name == "Deep Water" &&
+                                !enteredDeepWater && weight >= sinkInWater) { 
+							// also hit candy, so there is no weightloss 
+							allBeneath = raycast.GetComponent<RaycastController>().ColliderInfrontBeneathAll();
+							for(int i = 0; i < allBeneath.Length; i++){
+								if (allBeneath[i].collider.gameObject.tag == "Candy") weight += calorieLossDeepWater; // see above
+							}	
                             transform.Translate(Vector3.down);
                             enteredDeepWater = true;
                         }
+					// no hit beneath
                     } else {
-                        // Hit beneath beneath
+                        // Hit "Level Cube" beneath beneath, move down
                         if (raycast.GetComponent<RaycastController>().ColliderInfrontBeneathBeneath(out hitBeneathBeneath) && 
                                 hitBeneathBeneath.collider.gameObject.name == "Level Cube") {
                             transform.Translate(Vector3.down);
                         } else {
+							// reaching this point is no movement possible.
+							moveForward = false;
                             return;
                         }
-//bis hier ueberarbeiten!
                     }
+					// forward movement for every normal step or step down
                     transform.Translate(Vector3.left);
                     steps++;
 
+					// decide the weight cost for the forward movement
                     if (enteredDeepWater == true) {
                         weight -= calorieLossDeepWater;
                     } else {
                         weight -= calorieLoss;
                     }
                 }
+				// Movement completed
                 moveForward = false;
             }
 
+			// Determine whether the character has to die 
             if (weight <= starvationWeight || weight >= adiposeWeight)
             {
                 Die();
@@ -142,7 +161,7 @@ public class CharController : MonoBehaviour {
 
 	/*
 	 * Depending on the actual weight the princess has to change between thin, normal and fat. 
-	 * Therfor we change which gameObject of the princess is active. 
+	 * Therefor we change which gameObject of the princess is active. 
 	 */
     void ChangeWeight() {
         if (weight <= floatWeight) {
