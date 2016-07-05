@@ -140,6 +140,10 @@ public class CharController : MonoBehaviour {
         UpdateText();
     }
 
+	/*
+	 * Depending on the actual weight the princess has to change between thin, normal and fat. 
+	 * Therfor we change which gameObject of the princess is active. 
+	 */
     void ChangeWeight() {
         if (weight <= floatWeight) {
             pThin.SetActive(true);
@@ -157,12 +161,16 @@ public class CharController : MonoBehaviour {
             pThin.SetActive(false);
         }
     }
-
+	/*
+	 * If the character becomes to fat or thin the game is lost. 
+	 * For better visualization we rotate the character to the belly if it dies of starvation
+	 * and on the back if it is too fat to continue moving.
+	 */
     void Die() {
         isDead = true;
 
         // Starved or too thick?
-        if (weight <= 0) { 
+		if (weight <= starvationWeight) { 
             transform.rotation = Quaternion.Euler(new Vector3(0, transform.rotation.eulerAngles.y, 90));
         } else {
             transform.rotation = Quaternion.Euler(new Vector3(0, transform.rotation.eulerAngles.y, -90));
@@ -171,6 +179,8 @@ public class CharController : MonoBehaviour {
         transform.position -= new Vector3(0, 0.3f, 0);
     }
 
+
+	// All textfields with information about the character are updated here. 
     void UpdateText() {
         weightText.text = "Weight: " + weight;
         stepsText.text = "Steps: " + steps;
@@ -185,6 +195,12 @@ public class CharController : MonoBehaviour {
         }
     }
 
+	/*
+	 * If the character collides with candy 
+	 * the "calories" of the candy are added to the weight of the character
+	 * and the collected candy is deactivated so it is no longer part of the scene.
+	 * The chewing sound for collecting candy is played.
+	 */
     void OnTriggerEnter(Collider hit) {
         if (hit.gameObject.tag == "Candy") {
             weight += hit.gameObject.GetComponent<Sweets>().calories;
